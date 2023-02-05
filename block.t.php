@@ -96,35 +96,38 @@ function smarty_block_t($params, $text) {
 	}
 
 	// get context param
-	if (isset($params['context'])) {
+/*	if (isset($params['context'])) {
 		$context = $params['context'];
 		unset($params['context']);
 	} else {
 		$context = null;
-	}
+	}*/
 
 	// use plural if required parameters are set
 	if (isset($count) && isset($plural)) {
 		// use specified textdomain if available
-		if (isset($domain) && isset($context)) {
+		/*if (isset($domain) && isset($context)) {
 			$text = dnpgettext($domain, $context, $text, $plural, $count);
-		} elseif (isset($domain)) {
-			$text = dngettext($domain, $text, $plural, $count);
-		} elseif(isset($context)) {
+		} 
+		else*/if (isset($domain)) {
+			$text = _dngettext($domain, $text, $plural, $count);
+		} 
+		/*elseif(isset($context)) {
 			$text = npgettext($context, $text, $plural, $count);
-		} else {
-			$text = ngettext($text, $plural, $count);
+		} */
+		else {
+			$text = _ngettext($text, $plural, $count);
 		}
 	} else {
 		// use specified textdomain if available
-		if (isset($domain) && isset($context)) {
+		/*if (isset($domain) && isset($context)) {
 			$text = dpgettext($domain, $context, $text);
-		} elseif (isset($domain)) {
-			$text = dgettext($domain, $text);
-		} elseif (isset($context)) {
+		} else*/if (isset($domain)) {
+			$text = _dgettext($domain, $text);
+		} /*elseif (isset($context)) {
 			$text = pgettext($context, $text);
-		} else {
-			$text = gettext($text);
+		}*/ else {
+			$text = _gettext($text);
 		}
 	}
 
